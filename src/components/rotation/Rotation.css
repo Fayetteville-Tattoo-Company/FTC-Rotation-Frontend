@@ -1,0 +1,55 @@
+.Rotation-wrapper {
+  width: 100%;
+  min-width: 300px;
+  background: blue;
+  display: flex;
+  flex-direction: column;
+}
+
+.Rotation-item {
+  display: flex;
+  min-height: 100px;
+  background: orange;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  margin: 0.5rem;
+  align-items: center;
+}
+
+.Artist-img {
+  width: 5rem;
+  height: 5rem;
+  background: pink;
+  border-radius: 5px;
+  margin: 0.5rem;
+}
+.Artist-info {
+  display: flex;
+  background: hotpink;
+  justify-content: center;
+  align-items: center;
+}
+
+.Artist-info > p {
+  background: cornflowerblue;
+  margin: 0.5rem;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.Rotation-item-info {
+  display: flex;
+  flex: 1;
+  background: green;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+}
+
+.Rotation-item-info > p {
+  word-break: break-all;
+  flex: 1;
+  text-align: left;
+}
+

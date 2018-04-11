@@ -1,0 +1,50 @@
+.Appointments-wrapper {
+  flex: 1;
+  background: teal;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Appointments-wrapper header {
+  padding: 1rem;
+  background: green;
+}
+
+.Appointments-list {
+  width: 100%;
+  height: 100%;
+  background: tan;
+  display: block;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.Appointments-item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background: blue;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.design-img {
+  width: 5rem;
+  height: 5rem;
+  background: green;
+  margin: 0.5rem;
+}
+
+.Appointments-info {
+  background: black;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.Appointments-info > span {
+  background: orange;
+  word-break: break-all;
+  margin: 0.5rem;
+}
