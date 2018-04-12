@@ -1,30 +1,33 @@
 .Master_Create-wrapper {
   background: black;
   width: 100%;
-  height: 100%;
-  position: fixed;
+ 
+  position: flex;
   display: flex;
   align-items: center;
   flex-direction: column;
   min-width: 300px;
+  overflow-y: auto;
 }
 
 .Master_Create-wrapper > header {
   border-bottom: 1px solid white;
-  padding: 1rem 0;
   width: 100%;
 }
 
-.Master_Create-wrapper input {
-  margin: 1rem; 
+.Master_Create-wrapper  div  div  input {
+  flex: 1;
   text-align: center;
-  font-size: 1.5rem;
-  width: 80%;
+  font-size: 1rem;
+  display: flex;
+  margin: 0.5rem;
+  border: 2px solid black;
+  outline: none;
 }
 
 .Master_Create-image {
-  width: 200px;
-  height: 200px;
+  width: 7rem;
+  height: 7rem;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -33,5 +36,5 @@
   background: black;
   position: relative;
   border: 2px solid white;
-  margin-bottom: 0.5rem;
+  margin: 1rem 0;
 }

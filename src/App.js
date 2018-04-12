@@ -16,33 +16,38 @@ class App extends Component {
   componentWillMount(){
     this.systemConnect();
   }
+  componentWillUnmount(){
+  }
 
   verifyToken = (token, input) => { 
     axios.get(`${server}/verify`, {headers:{Authorization: token}})
     .then((r) => {
       if(this.state.status === 'unactive'){
-        if(r.data === "AUTHORIZED") {
+        if(r.data.access === "AUTHORIZED") {
           console.log("AUTHORIZED ACCESS");
           window.localStorage.setItem('access_token', token);
           return this.setState({status: 'master-create'});
         }
-        if(r.data === "UNAUTHORIZED"){
+        if(r.data.access === "UNAUTHORIZED"){
           window.localStorage.clear();
           console.log("UNAUTHORIZED ACCESS");
           if(input) input.style.border = '2px solid red';
         }
       }
       if(this.state.status === 'active'){
-        if(r.data === 'UNAUTHORIZED') {
+        if(r.data.access === 'UNAUTHORIZED') {
           window.localStorage.clear();
           this.setState({status: 'signin'});
         }
-        if(r.data === 'AUTHORIZED'){
+        if(r.data.access === 'AUTHORIZED'){
+          console.log(r.data);
+          window.localStorage.setItem('access_token', r.data.token);
           this.setState({status: 'authenticated'});
         }
       }
       
-    });
+    })
+    .catch((err) => console.log(err));
   }
 
   systemConnect = () => {
@@ -51,7 +56,7 @@ class App extends Component {
       const token = window.localStorage.getItem('access_token');
       this.verifyToken(token);
       this.setState({status: res.data, network: 'connected'});
-      console.log("Connected");
+      console.log("Connected", res.data);
     })
     .catch((err) => {
       this.setState({network: 'disconnected'});
@@ -82,7 +87,7 @@ class App extends Component {
           : null
         }
         {this.state.status === 'unactive' ? <Access main={this} /> : null}
-        {this.state.status === 'master-create' ? <MasterCreate /> : null}        
+        {this.state.status === 'master-create' ? <MasterCreate main={this}/> : null}        
         {this.state.status === 'signin' ? <Signin main={this}/> : null}
         {this.state.status === 'authenticated' && this.state.main === 'loaded' ? <Dashboard /> : null}
       </div>

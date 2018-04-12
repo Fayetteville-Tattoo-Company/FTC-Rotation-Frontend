@@ -16,6 +16,7 @@ export default class Signin extends Component {
     console.log('working');
     const token = jwt.encode(key, {username: e.target.username.value, pass: e.target.pass.value}).value; 
     window.localStorage.setItem('access_token', token);
+    //console.log(token);
     this.main.setState({status: 'active', main: 'loading'});
     this.main.verifyToken(token);
   }
