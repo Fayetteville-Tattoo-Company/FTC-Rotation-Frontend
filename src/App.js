@@ -3,8 +3,8 @@ import {Signin, Dashboard, Access, MasterCreate} from './components';
 import axios from 'axios';
 import './App.css';
 const jwt = require('json-web-token');
-const key = process.env.KEY || require('./config.json').secret;
-const server = process.env.SERVER || require('./config.json').server;
+const key = process.env.KEY;
+const server = process.env.SERVER;
 
 const checkUsername = (e) => {
   const username = document.getElementsByName('username')[0];
