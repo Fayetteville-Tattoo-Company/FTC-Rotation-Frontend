@@ -5,6 +5,7 @@ const jwt = require('json-web-token');
 const server = process.env.SERVER || require('../../config.json').server;
 const key = process.env.KEY || require('../../config.json').secret;
 
+
 export default class MasterCreate extends Component {
   constructor(props){
     super(props);
@@ -39,7 +40,8 @@ export default class MasterCreate extends Component {
       const fields = {
         username: username.value,
         name: name.value,
-        password: password.value
+        password: password.value,
+        role: 'master'
       }
       const token = jwt.encode(key, fields).value;
       axios.post(`${server}/create-admin`, {token}, {headers:{Authorization:window.localStorage.getItem('access_token')}})

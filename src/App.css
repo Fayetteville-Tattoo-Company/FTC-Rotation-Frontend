@@ -6,6 +6,7 @@
   position: absolute;
   background: rgb(0,0,0);
   color: white;
+  min-width: 300px;
 }
 
 .App-logo {
@@ -20,6 +21,16 @@
   color: white;
 }
 
+.Invite-wrapper input {
+  margin: 1rem;
+  flex:1;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  min-width: 250px;
+  text-align: center;
+  padding: 0.5rem;
+}
 .App-title {
   font-size: 1.5em;
 }
