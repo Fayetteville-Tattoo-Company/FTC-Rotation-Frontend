@@ -97,7 +97,6 @@ module.exports = {
       // Make sure your source files are compiled, as they will not be processed in any way.
       new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
       new webpack.DefinePlugin({
-        ENV: JSON.stringify(require(path.join(__dirname, "src", "config", require('../.env')))),
         'process.env': {
           'NODE_ENV': JSON.stringify(process.env.NODE_ENV) || '"development"',
           'SERVER': JSON.stringify(process.env.SERVER) || "http://localhost:7777",
