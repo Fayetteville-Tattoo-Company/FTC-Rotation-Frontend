@@ -3,8 +3,8 @@ import axios from 'axios';
 import './Appointments.css';
 import { format } from 'url';
 const jwt = require('json-web-token');
-const server = process.env.SERVER || require('../../config.json').server;
-const key = process.env.KEY || require('../../config.json').secret;
+const server = process.env.SERVER;
+const key = process.env.KEY;
 
 const Appointment = (props) => {
   const date = new Date(props.createdAt);
