@@ -80,7 +80,7 @@ export default class MasterCreate extends Component {
         
           <div style={{width: '80%', alignItems:'center', display: 'flex', flexDirection: 'column', borderRadius: 5}}>
             <div className="Master_Create-image">
-              <img id="logo" alt="logo" id="preview" src={'images/ftc-logo-black.png'} width="100%"/>
+              <img className="logo" alt="logo" id="preview" src={'images/ftc-logo-black.png'} width="100%"/>
               <input style={{ width: '100%', position: 'absolute', opacity: 0, cursor: 'pointer'}}onChange={(e) => this.preview(e)} type="file" />
               
             </div> 
