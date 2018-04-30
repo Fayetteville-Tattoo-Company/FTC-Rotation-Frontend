@@ -87,7 +87,7 @@ class App extends Component {
 
   componentDidMount(){
     this.systemConnect();
-    console.log("---->",process.env.NODE_ENV);
+    console.log("---->",process.env.SERVER);
     
   }
 
