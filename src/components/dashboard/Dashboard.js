@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {Rotation, Appointments} from "../";
 import axios from 'axios';
 import './Dashboard.css';
-const server = process.env.SERVER;
-const key = process.env.KEY;
+const key = process.env.REACT_APP_KEY;
+const server = process.env.REACT_APP_SERVER;
 const jwt = require('json-web-token');
 
 export default class Dashboard extends Component {

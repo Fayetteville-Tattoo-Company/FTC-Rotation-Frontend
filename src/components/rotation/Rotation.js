@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './Rotation.css';
-const server = process.env.SERVER;
-const key = process.env.KEY;
+const key = process.env.REACT_APP_KEY;
+const server = process.env.REACT_APP_SERVER;
 const jwt = require('json-web-token');
 
 export default class Rotation extends Component {

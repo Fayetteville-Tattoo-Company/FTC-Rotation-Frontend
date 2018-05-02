@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import './Signin.css';
 const jwt = require('json-web-token');
-const key = process.env.KEY;
+const key = process.env.REACT_APP_KEY;
+
 export default class Signin extends Component {
   constructor(props){
     super(props);

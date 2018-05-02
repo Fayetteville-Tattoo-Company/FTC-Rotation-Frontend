@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import './MasterCreate.css'
 const jwt = require('json-web-token');
-const server = process.env.SERVER;
-const key = process.env.KEY;
+const key = process.env.REACT_APP_KEY;
+const server = process.env.REACT_APP_SERVER;
 
 export default class MasterCreate extends Component {
   constructor(props){

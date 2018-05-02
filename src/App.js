@@ -3,8 +3,8 @@ import {Signin, Dashboard, Access, MasterCreate} from './components';
 import axios from 'axios';
 import './App.css';
 const jwt = require('json-web-token');
-const key = process.env.KEY;
-const server = process.env.SERVER;
+const key = process.env.REACT_APP_KEY;
+const server = process.env.REACT_APP_SERVER;
 
 const checkUsername = (e) => {
   const username = document.getElementsByName('username')[0];
@@ -87,7 +87,7 @@ class App extends Component {
 
   componentDidMount(){
     this.systemConnect();
-      
+    console.log(process.env.REACT_APP_KEY); 
     
   }
 
