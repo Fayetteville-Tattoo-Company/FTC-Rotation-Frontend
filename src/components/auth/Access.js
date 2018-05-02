@@ -16,6 +16,7 @@ export default class Access extends Component {
   sizeUp = () => document.getElementById('logo').style.width = '80%';
   sizeDown = () => document.getElementById('logo').style.width = '40%';
   render(){
+    console.log(process.env.BOOM);
     return (
       <form onSubmit={(e) => this.authorize(e)} className="Access-wrapper" >
         <div  className="Access-section">

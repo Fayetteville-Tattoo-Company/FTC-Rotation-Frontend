@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './Appointments.css';
-import { format } from 'url';
 const jwt = require('json-web-token');
 const key = process.env.REACT_APP_KEY;
 const server = process.env.REACT_APP_SERVER;

@@ -56,7 +56,7 @@ export default class Rotation extends Component {
   }
 
   checkNumber = (e) => {
-    if(e.target.value && Number.isNaN(Number(e.target.value.split('')[e.target.value.length - 1])) || e.target.value.length > 13) {
+    if(Number.isNaN(Number(e.target.value.split('')[e.target.value.length - 1])) || e.target.value.length > 13) {
       const num = e.target.value.split('');
       num.pop();
       e.target.value = num.join('');
