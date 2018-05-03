@@ -37,7 +37,6 @@
     "react": "^16.3.0",
     "react-dev-utils": "^5.0.0",
     "react-dom": "^16.3.0",
-    "serve": "^6.5.6",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
@@ -47,7 +46,7 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "npm run build",
+    "start": "npm run build&& serve -s build -p 3000",
     "dev": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
