@@ -95,7 +95,7 @@ class App extends Component {
 
 
   verifyToken = (token, input) => {
-    axios.get(`${server}/verify`, {headers:{Authorization: token}})
+    axios.get(`${server}/verify`, {headers:{Authorization: this.state.status === 'unactive' ? jwt.encode(key, token).value : token}})
     .then((r) => {
       if(this.state.status === 'invite-signup') return;
       if(this.state.status === 'unactive'){
