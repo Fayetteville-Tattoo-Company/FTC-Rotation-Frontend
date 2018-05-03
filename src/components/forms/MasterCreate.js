@@ -44,7 +44,7 @@ export default class MasterCreate extends Component {
         role: 'master'
       }
       const token = jwt.encode(key, fields).value;
-      axios.post(`${server}/create-admin`, {token}, {headers:{Authorization:window.localStorage.getItem('access_token')}})
+      axios.post(`${server}/create-admin`, {token}, {headers:{Authorization:jwt.encode(key, window.localStorage.getItem('access_token')).value}})
       .then((res) => {
         if(res.data.access === 'AUTHORIZED'){
           window.localStorage.setItem('access_token', res.data.token);
