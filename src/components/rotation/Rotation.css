@@ -58,9 +58,13 @@
 .Artist-img {
   width: 5rem;
   height: 5rem;
-  background: pink;
   border-radius: 5px;
   margin: 0.5rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
 }
 .Artist-info {
   display: flex;

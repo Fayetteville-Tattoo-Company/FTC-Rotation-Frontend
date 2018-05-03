@@ -17,22 +17,26 @@ const Appointment = (props) => {
       {props.artist ? <td>{props.artist}</td> : null}
       <td>{props.date.split('T')[0]}</td>
       <td>{props.time}</td>
-      <td className="Appointments-id" onClick={(e) => log(e)} style={{background: 'black', color: 'white', flex: 1, display: 'flex', width: '100%',position: 'absolute'}}>
-        
-        {
-          props.rotationID ? 
-            <i style={{paddingLeft: '1%', paddingRight: '0.4rem'}} className="fas fa-id-card"/> 
-          : null
-        }{props.rotationID} 
+      {
+        props.role === 'master' || props.role === 'admin' ? 
+        <td className="Appointments-id" onClick={(e) => log(e)} style={{background: 'black', color: 'white', flex: 1, display: 'flex', width: '100%',position: 'absolute'}}>
+          
+          {
+            props.rotationID ? 
+              <i style={{paddingLeft: '1%', paddingRight: '0.4rem'}} className="fas fa-id-card"/> 
+            : null
+          }{props.rotationID} 
 
-        {
-          props.number ? 
-            <i style={{paddingLeft: '1%', paddingRight: '0.4rem'}} className="fas fa-phone-square" /> 
-          : null
-        }{props.number} 
-        
-        {props.master ? <button onClick={() => props.main.removeAppointment(props.id)}><i style={{paddingLeft: '1%', paddingRight: '0.4rem', cursor: 'pointer'}} className="fas fa-trash-alt -- hover-red" /></button> : null}
-      </td>
+          {
+            props.number ? 
+              <i style={{paddingLeft: '1%', paddingRight: '0.4rem'}} className="fas fa-phone-square" /> 
+            : null
+          }{props.number} 
+          
+          {props.role === 'master' ? <span  style={{marginLeft: 10}} onClick={() => props.main.removeAppointment(props.id)}><i style={{ cursor: 'pointer'}} className="fas fa-trash-alt -- hover-red" /></span > : null}
+        </td>
+        : null
+      }
     </tr>
   );
 }
@@ -95,7 +99,7 @@ export default class Appointments extends Component {
                               rotationID={user.admin ? appointment.rotationID._id : null} 
                               artist={user.admin ? appointment.rotationID.artist.name : null}
                               number={user.admin ? appointment.number : null}
-                              master={user.admin ? user.admin.role === 'master' ? 1 : 0  : 0}
+                              role={user.admin ? user.admin.role : null}
                             />
                   }) 
                 }

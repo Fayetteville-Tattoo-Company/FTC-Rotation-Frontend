@@ -3,6 +3,7 @@ import {Signin, Dashboard, Access, MasterCreate} from './components';
 import axios from 'axios';
 import './App.css';
 import {log} from  './tools';
+import { WSAEINVALIDPROCTABLE } from 'constants';
 const jwt = require('json-web-token');
 const key = process.env.REACT_APP_KEY;
 const server = process.env.REACT_APP_SERVER;
@@ -39,6 +40,8 @@ const addUser = (e, type, iKey, email, main) => {
     email, 
     type
   };
+  const image = new FormData();
+  image.append('image', e.target.image.files[0]);
   const token = jwt.encode(key, fields).value;
   axios.post(`${server}/invite-signup`, fields, {headers:{Authorization: token}})
   .then(async (res) => {
@@ -50,7 +53,15 @@ const addUser = (e, type, iKey, email, main) => {
     if(res.data.status === 'SUCCESS') {
       window.localStorage.clear();
       window.localStorage.setItem('access_token', res.data.token);
-      await main.setState({main: 'loading', status: 'authenticated'});
+      axios.post(`${server}/profile`, image, {headers:{Authorization: window.localStorage.getItem('access_token')}})
+      .then(async (r) => {
+        
+        await main.setState({main: 'loading', status: 'authenticated'});
+      })
+      .catch((e) => {
+        if(e) console.log(e);
+      })
+      
     }
   })
   .catch((err) => alert(err));
@@ -63,6 +74,7 @@ const Invite = (props) => {
     <div className="Invite-wrapper" style={{position: 'fixed', justifyContent: 'flex-start', flexDirection: 'column', alignItems: 'center', display: 'flex', width: '100%', height: '100%', background: 'black'}}>
       <header style={{width: '100%', background: 'black', borderBottom: '1px solid white'}}><h2>{`${user.type.toUpperCase()} FORM`}</h2></header>
       <form onSubmit={(e) => addUser(e, user.type, user.key, user.email, props.main)}style={{width: '80%', minWidth: 300, maxWidth: '50%', margin: '2rem',display: 'flex', background:'rgb(86, 86, 86)',border: '1px solid white', borderRadius: 5, padding: '1rem', flexWrap: 'wrap'}}>
+        <input type="file" name='image' />
         <input onChange={(e) => checkUsername(e)} name="username" placeholder="USERNAME" />
         <input name="name" placeholder="NAME"/>
         <input type="password" name="pass" placeholder="PASSWORD"/>
@@ -95,7 +107,7 @@ class App extends Component {
 
 
   verifyToken = (token, input) => {
-    axios.get(`${server}/verify`, {headers:{Authorization: this.state.status === 'unactive' ? jwt.encode(key, token).value : token}})
+    axios.get(`${server}/verify`, {headers:{Authorization:token}})
     .then((r) => {
       if(this.state.status === 'invite-signup') return;
       if(this.state.status === 'unactive'){

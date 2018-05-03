@@ -122,7 +122,7 @@ export default class Rotation extends Component {
       }
       {this.state.artists[this.state.rotation] ?  <div className="Rotation-item">
           <div className="Artist-img">
-            <img alt="artist" src="https://scontent-atl3-1.xx.fbcdn.net/v/t1.0-9/28055656_10211614126494102_1213128860185249397_n.jpg?_nc_cat=0&oh=bddd84178cefd125cfaa639146be7b56&oe=5B6E2A80" height="100%"/>
+            <img alt="artist" src={`${server}/image/artist/${this.state.artists[this.state.rotation].username}`} onError={(e) => e.target.src = 'images/ftc-logo-black.png'}height="100%"/>
           </div>
           <div className="Artist-info" style={this.state.height > this.state.width ? {borderRadius: 5} : null}>
             <p>{this.state.artists[this.state.rotation].location} </p>
