@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Signin, Dashboard, Access, MasterCreate} from './components';
 import axios from 'axios';
 import './App.css';
+import {log} from  './tools';
 const jwt = require('json-web-token');
 const key = process.env.REACT_APP_KEY;
 const server = process.env.REACT_APP_SERVER;
@@ -16,7 +17,7 @@ const checkUsername = (e) => {
     if(res.data === 0) return username.style.border = '2px solid red';
   })
   .catch((err) => {
-    console.log(err);
+    log(err);
   })
 }
 
@@ -57,7 +58,7 @@ const addUser = (e, type, iKey, email, main) => {
 
 const Invite = (props) => {
   const user = jwt.decode(key, window.localStorage.getItem('invite_token')).value;
-  console.log(user);
+  log(user);
   return props.main.state.main === "loaded" ? (
     <div className="Invite-wrapper" style={{position: 'fixed', justifyContent: 'flex-start', flexDirection: 'column', alignItems: 'center', display: 'flex', width: '100%', height: '100%', background: 'black'}}>
       <header style={{width: '100%', background: 'black', borderBottom: '1px solid white'}}><h2>{`${user.type.toUpperCase()} FORM`}</h2></header>
@@ -87,8 +88,8 @@ class App extends Component {
 
   componentDidMount(){
     this.systemConnect();
-    console.log(process.env.REACT_APP_KEY); 
-    console.log(process.env.NODE_ENV); 
+    log(process.env.REACT_APP_KEY); 
+    log(process.env.NODE_ENV); 
     
   }
 
@@ -99,13 +100,13 @@ class App extends Component {
       if(this.state.status === 'invite-signup') return;
       if(this.state.status === 'unactive'){
         if(r.data.access === "AUTHORIZED") {
-          console.log("AUTHORIZED ACCESS");
+          log("AUTHORIZED ACCESS");
           window.localStorage.setItem('access_token', token);
           return this.setState({status: 'master-create'});
         }
         if(r.data.access === "UNAUTHORIZED"){
           window.localStorage.removeItem('access_token');
-          console.log("UNAUTHORIZED ACCESS");
+          log("UNAUTHORIZED ACCESS");
           if(input) input.style.border = '2px solid red';
         }
       }
@@ -115,28 +116,28 @@ class App extends Component {
           this.setState({status: 'signin'});
         }
         if(r.data.access === 'AUTHORIZED'){
-          console.log(r.data);
+          log(r.data);
           window.localStorage.setItem('access_token', r.data.token);
           this.setState({status: 'authenticated'});
         }
       }
       
     })
-    .catch((err) => console.log(err));
+    .catch((err) => log(err));
   }
 
   systemConnect = () => {
     axios.get(`${server}/status`)
     .then((res) => {
       const token = window.localStorage.getItem('access_token');
-      console.log(token);
+      log(token);
       this.verifyToken(token);
       this.setState({status: res.data, network: 'connected'});
-      console.log("Connected", res.data);
+      log("Connected", res.data);
     })
     .catch((err) => {
       this.setState({network: 'disconnected'});
-      setTimeout(() => { console.log('Reconnecting'); this.systemConnect();}, 5000);
+      setTimeout(() => { log('Reconnecting'); this.systemConnect();}, 5000);
     });
   }
 
@@ -151,7 +152,7 @@ class App extends Component {
     if(this.state.main === 'loaded' && window.localStorage.getItem('invite_token') && this.state.status !== 'invite-signup'){
       this.setState({status: 'invite-signup'});
     }
-    this.state.main === 'loading' ? setTimeout(() => this.load(), this.loadingDelay) : console.log("loaded");        
+    this.state.main === 'loading' ? setTimeout(() => this.load(), this.loadingDelay) : log("loaded");        
     if(this.state.main === 'loaded' && window.location.hash.length){
       window.localStorage.clear();
       window.localStorage.setItem('invite_token', window.location.hash.split('#')[1]);

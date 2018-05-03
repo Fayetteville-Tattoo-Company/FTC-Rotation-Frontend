@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './Appointments.css';
+import {log} from '../../tools';
 const jwt = require('json-web-token');
 const key = process.env.REACT_APP_KEY;
 const server = process.env.REACT_APP_SERVER;
@@ -16,7 +17,7 @@ const Appointment = (props) => {
       {props.artist ? <td>{props.artist}</td> : null}
       <td>{props.date.split('T')[0]}</td>
       <td>{props.time}</td>
-      <td className="Appointments-id" onClick={(e) => console.log(e)} style={{background: 'black', color: 'white', flex: 1, display: 'flex', width: '100%',position: 'absolute'}}>
+      <td className="Appointments-id" onClick={(e) => log(e)} style={{background: 'black', color: 'white', flex: 1, display: 'flex', width: '100%',position: 'absolute'}}>
         
         {
           props.rotationID ? 
@@ -58,7 +59,7 @@ export default class Appointments extends Component {
     .then((res) => {
       if(res.data.length !== this.state.appointments.length) return this.setState({appointments: res.data});
     })
-    .catch((err) => console.log(err));
+    .catch((err) =>log(err));
   }
   render(){
     const user = jwt.decode(key, window.localStorage.getItem('access_token')).value;

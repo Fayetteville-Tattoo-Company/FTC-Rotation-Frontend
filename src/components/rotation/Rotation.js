@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './Rotation.css';
+import {log} from '../../tools';
 const key = process.env.REACT_APP_KEY;
 const server = process.env.REACT_APP_SERVER;
 const jwt = require('json-web-token');
@@ -19,7 +20,7 @@ export default class Rotation extends Component {
   componentDidMount(){
     axios.get(`${server}/artists`, {headers:{Authorization:window.localStorage.getItem('access_token')}})
     .then((res) => {
-      console.log('running');
+      log('running');
       this.setState({artists: res.data});
     })
     .catch((err) => console.error(err));
@@ -49,7 +50,7 @@ export default class Rotation extends Component {
       time: e.target.time.value === '--' ? (new Date()).toLocaleTimeString() : e.target.time.value
     }, {headers:{Authorization: window.localStorage.getItem('access_token')}})
     .then((res) => {
-      console.log(res.data);
+      log(res.data);
       this.setState({form: false, date: this.state.curr})
     })
     .catch((err) => console.error(err));

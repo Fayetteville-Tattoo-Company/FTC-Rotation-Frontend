@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './MasterCreate.css'
+import {log} from '../../tools';
 const jwt = require('json-web-token');
 const key = process.env.REACT_APP_KEY;
 const server = process.env.REACT_APP_SERVER;
@@ -13,7 +14,7 @@ export default class MasterCreate extends Component {
   preview = (evt) => {  
     const img = evt.target.files[0];
     if(img){
-      if(img.type.split('/')[0] !== 'image') return console.log('UNSUPPORTED TYPE');
+      if(img.type.split('/')[0] !== 'image') return log('UNSUPPORTED TYPE');
       const reader = new FileReader();
       reader.readAsDataURL(img);
       reader.onload = (e) => {
@@ -49,10 +50,10 @@ export default class MasterCreate extends Component {
           window.localStorage.setItem('access_token', res.data.token);
           return this.main.setState({main: 'loading', status: 'authenticated'});
         }
-        console.log('UNAUTHORIZED');
+        log('UNAUTHORIZED');
       })
       .catch((err) => {
-        console.log(err);
+        log(err);
       });
     
   }
@@ -67,7 +68,7 @@ export default class MasterCreate extends Component {
       if(res.data === 0) return username.style.border = '2px solid red';
     })
     .catch((err) => {
-      console.log(err);
+      log(err);
     })
   }
 

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Rotation, Appointments} from "../";
 import axios from 'axios';
 import './Dashboard.css';
+import {log} from '../../tools';
 const key = process.env.REACT_APP_KEY;
 const server = process.env.REACT_APP_SERVER;
 const jwt = require('json-web-token');
@@ -18,12 +19,12 @@ export default class Dashboard extends Component {
   }
   invite = (e) => {
     e.preventDefault();
-    console.log(this.state.inviteType);
+    log(this.state.inviteType);
     axios.post(`${server}/invite`, {email: e.target.email.value, userType: this.state.inviteType}, {headers:{Authorization: window.localStorage.getItem('access_token')}})
     .then((res) => {
-      console.log(res.data);
+      log(res.data);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => log(err));
   }
   render(){
   const user = jwt.decode(key, window.localStorage.getItem('access_token')).value;
