@@ -31,6 +31,8 @@ const addUser = (e, type, iKey, email, main) => {
   if(!iKey) return alert('ACCESS KEY MISSING');
   if(!username || !name || !pass || !confirm) return alert('ALL FIELDS ARE REQUIRED');
   if(pass !== confirm) return alert('PASSWORDS DO NOT MATCH');
+  const image = new FormData();
+  image.append('image', e.target.image.files[0]);
   const fields = {
     username,
     name,
@@ -38,10 +40,10 @@ const addUser = (e, type, iKey, email, main) => {
     role: 'admin',
     key: iKey,
     email, 
-    type
+    type,
+    image
   };
-  const image = new FormData();
-  image.append('image', e.target.image.files[0]);
+  
   const token = jwt.encode(key, fields).value;
   axios.post(`${server}/invite-signup`, fields, {headers:{Authorization: token}})
   .then(async (res) => {
