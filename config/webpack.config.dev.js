@@ -98,7 +98,7 @@ module.exports = {
       new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
       new webpack.DefinePlugin({
         'process.env': {
-          'NODE_ENV': JSON.stringify(process.env.NODE_ENV) || '"jon"',
+          'NODE_ENV': JSON.stringify(process.env.NODE_ENV) || '"development"',
           'SERVER': JSON.stringify(process.env.SERVER) || "http://localhost:7777",
           'KEY': JSON.stringify(process.env.KEY)
         }

@@ -43,6 +43,8 @@ export default class Dashboard extends Component {
         <div className="Dashboard-dropdown" style={this.state.settings ? {height: '3rem'} : null}>
           <div className="Dashboard-dropdown-btn" onClick={() => this.setState({settings: false, inviteForm: true, inviteType: 'admin'})} style={{display: 'flex', justifyContent: 'center', alignItems: 'center',background: 'rgb(38,38,38)', padding: '1rem', cursor: 'pointer'}}>CREATE ADMIN</div>
           <div className="Dashboard-dropdown-btn" onClick={() => this.setState({settings: false, inviteForm: true, inviteType: 'artist'})} style={{display: 'flex', justifyContent: 'center', alignItems: 'center',background: 'rgb(38,38,38)', padding: '1rem', cursor: 'pointer'}}>CREATE ARTIST</div>
+          <div className="Dashboard-dropdown-btn" onClick={() => this.setState({settings: false, inviteForm: true, inviteType: 'artist'})} style={{display: 'flex', justifyContent: 'center', alignItems: 'center',background: 'rgb(38,38,38)', padding: '1rem', cursor: 'pointer'}}>RESET ROTATION</div>
+        
         </div>
         <div className="Dashboard-dropdown" style={this.state.inviteForm ? {height: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center'} : null}>
           <form onSubmit={(e) => this.invite(e)} className="Dashboard-admin-form" style={{height: '90%', width: '90%',display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', background: 'rgb(38,38,38)', padding: '1rem'}}>

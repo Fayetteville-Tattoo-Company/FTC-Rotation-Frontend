@@ -3,7 +3,6 @@ import {Signin, Dashboard, Access, MasterCreate} from './components';
 import axios from 'axios';
 import './App.css';
 import {log} from  './tools';
-import { WSAEINVALIDPROCTABLE } from 'constants';
 const jwt = require('json-web-token');
 const key = process.env.REACT_APP_KEY;
 const server = process.env.REACT_APP_SERVER;
@@ -22,73 +21,78 @@ const checkUsername = (e) => {
   })
 }
 
-const addUser = (e, type, iKey, email, main) => {
-  e.preventDefault();
-  const username = e.target.username.value;
-  const name = e.target.name.value;
-  const pass = e.target.pass.value;
-  const confirm = e.target.confirm.value;
-  if(!iKey) return alert('ACCESS KEY MISSING');
-  if(!username || !name || !pass || !confirm) return alert('ALL FIELDS ARE REQUIRED');
-  if(pass !== confirm) return alert('PASSWORDS DO NOT MATCH');
-  const image = new FormData();
-  image.append('image', e.target.image.files[0]);
-  const fields = {
-    username,
-    name,
-    pass,
-    role: 'admin',
-    key: iKey,
-    email, 
-    type,
-    image
-  };
-  
-  const token = jwt.encode(key, fields).value;
-  axios.post(`${server}/invite-signup`, fields, {headers:{Authorization: token}})
-  .then(async (res) => {
-    if(res.data === 'UNAUTHORIZED') {
-      alert('KEY IS NO LONGER VALID');
-      window.localStorage.clear();
-      await main.setState({main:'loading', status: 'signin'});
-    }
-    if(res.data.status === 'SUCCESS') {
-      window.localStorage.clear();
-      window.localStorage.setItem('access_token', res.data.token);
-      axios.post(`${server}/profile`, image, {headers:{Authorization: window.localStorage.getItem('access_token')}})
-      .then(async (r) => {
-        
-        await main.setState({main: 'loading', status: 'authenticated'});
-      })
-      .catch((e) => {
-        if(e) console.log(e);
-      })
-      
-    }
-  })
-  .catch((err) => alert(err));
-}
 
-const Invite = (props) => {
-  const user = jwt.decode(key, window.localStorage.getItem('invite_token')).value;
-  log(user);
-  return props.main.state.main === "loaded" ? (
+
+class Invite extends Component {
+
+  constructor(props){
+    super(props);
+    this.main = props.main;
+    this.state = {
+      image: null
+    }
+  }
+  addUser = (e, type, iKey, email, main) => {
+    e.preventDefault();
+    const username = e.target.username.value;
+    const name = e.target.name.value;
+    const pass = e.target.pass.value;
+    const confirm = e.target.confirm.value;
+    if(!iKey) return alert('ACCESS KEY MISSING');
+    if(!username || !name || !pass || !confirm) return alert('ALL FIELDS ARE REQUIRED');
+    if(pass !== confirm) return alert('PASSWORDS DO NOT MATCH');
+      console.log(this.state.image);
+      const file = new FormData();
+      file.append('image', this.state.image);
+
+      const fields = {
+        username,
+        name,
+        pass,
+        role: 'admin',
+        key: iKey,
+        email, 
+        type,
+        profile: file
+      };
+      const token = jwt.encode(key, fields).value;
+      axios.post(`${server}/invite-signup`, fields, {headers:{Authorization: token}})
+      .then( (res) => {
+        if(res.data === 'UNAUTHORIZED') {
+          alert('KEY IS NO LONGER VALID');
+          window.localStorage.clear();
+           this.main.setState({main:'loading', status: 'signin'});
+        }
+        if(res.data.status === 'SUCCESS') {
+          window.localStorage.clear();
+          window.localStorage.setItem('access_token', res.data.token); 
+        }
+      })
+      .catch((err) => alert(err));
+    }
+  
+
+  render(){
+    const user = jwt.decode(key, window.localStorage.getItem('invite_token')).value;
+    log(user);
+    return this.main.state.main === "loaded" ? (
     <div className="Invite-wrapper" style={{position: 'fixed', justifyContent: 'flex-start', flexDirection: 'column', alignItems: 'center', display: 'flex', width: '100%', height: '100%', background: 'black'}}>
       <header style={{width: '100%', background: 'black', borderBottom: '1px solid white'}}><h2>{`${user.type.toUpperCase()} FORM`}</h2></header>
-      <form onSubmit={(e) => addUser(e, user.type, user.key, user.email, props.main)}style={{width: '80%', minWidth: 300, maxWidth: '50%', margin: '2rem',display: 'flex', background:'rgb(86, 86, 86)',border: '1px solid white', borderRadius: 5, padding: '1rem', flexWrap: 'wrap'}}>
-        <input type="file" name='image' />
+      <form encType='multipart/form-data' onSubmit={(e) => this.addUser(e, user.type, user.key, user.email, this.main)}style={{width: '80%', minWidth: 300, maxWidth: '50%', margin: '2rem',display: 'flex', background:'rgb(86, 86, 86)',border: '1px solid white', borderRadius: 5, padding: '1rem', flexWrap: 'wrap'}}>
+        {/*<input onChange={(e) => this.setState({image: e.target.files[0]})} type="file" name='image' />*/}
         <input onChange={(e) => checkUsername(e)} name="username" placeholder="USERNAME" />
         <input name="name" placeholder="NAME"/>
         <input type="password" name="pass" placeholder="PASSWORD"/>
         <input type="password" name="confirm" placeholder="CONFIRM"/>
         <div style={{display: 'flex', paddingRight: '1rem', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-end', width: '100%'}}>
           <button ><i style={{fontSize: '1.5rem', color: 'green', cursor: 'pointer'}} className="far fa-check-circle"/></button>
-          <button onClick={(e) => {e.preventDefault(); props.main.setState({main: 'loading', status: 'signin'}); window.localStorage.clear()}}><i style={{fontSize: '1.5rem', color: 'red', cursor: 'pointer'}} className="fas fa-ban"/></button>
+          <button onClick={(e) => {e.preventDefault(); this.main.setState({main: 'loading', status: 'signin'}); window.localStorage.clear()}}><i style={{fontSize: '1.5rem', color: 'red', cursor: 'pointer'}} className="fas fa-ban"/></button>
         </div>
       </form>
       
     </div>
-  ) : <div/>;
+   ) : <div/>;
+  } 
 }
 
 
