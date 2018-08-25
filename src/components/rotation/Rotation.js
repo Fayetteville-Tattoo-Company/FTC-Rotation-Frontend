@@ -4,7 +4,7 @@ import './Rotation.css';
 import {log} from '../../tools';
 const key = process.env.REACT_APP_KEY;
 const server = process.env.REACT_APP_SERVER;
-const jwt = require('json-web-token');
+const jwt = require('jsonwebtoken');
 
 export default class Rotation extends Component {
   constructor(){
@@ -81,7 +81,7 @@ export default class Rotation extends Component {
   }
 
   render(){
-    const user = jwt.decode(key, window.localStorage.getItem('access_token')).value;
+    const user = jwt.decode(key, window.localStorage.getItem('access_token'));
     window.onresize = () => this.setState({height: window.innerHeight, width: window.innerWidth});
     return (
       <div className="Rotation-wrapper">

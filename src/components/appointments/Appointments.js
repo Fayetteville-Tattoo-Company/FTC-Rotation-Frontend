@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import './Appointments.css';
 import {log} from '../../tools';
-const jwt = require('json-web-token');
+const jwt = require('jsonwebtoken');
 const key = process.env.REACT_APP_KEY;
 const server = process.env.REACT_APP_SERVER;
 
@@ -66,7 +66,7 @@ export default class Appointments extends Component {
     .catch((err) =>log(err));
   }
   render(){
-    const user = jwt.decode(key, window.localStorage.getItem('access_token')).value;
+    const user = jwt.decode(key, window.localStorage.getItem('access_token'));
     
    return user ? (
       <div className="Appointments-wrapper">

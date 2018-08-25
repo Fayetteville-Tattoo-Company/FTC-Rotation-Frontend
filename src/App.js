@@ -3,7 +3,8 @@ import {Signin, Dashboard, Access, MasterCreate} from './components';
 import axios from 'axios';
 import './App.css';
 import {log} from  './tools';
-const jwt = require('json-web-token');
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
 const key = process.env.REACT_APP_KEY;
 const server = process.env.REACT_APP_SERVER;
 
@@ -55,7 +56,7 @@ class Invite extends Component {
         type,
         profile: file
       };
-      const token = jwt.encode(key, fields).value;
+      const token = jwt.sign(fields, key);
       axios.post(`${server}/invite-signup`, fields, {headers:{Authorization: token}})
       .then( (res) => {
         if(res.data === 'UNAUTHORIZED') {
@@ -73,7 +74,7 @@ class Invite extends Component {
   
 
   render(){
-    const user = jwt.decode(key, window.localStorage.getItem('invite_token')).value;
+    const user = jwt.decode(key, window.localStorage.getItem('invite_token'));
     log(user);
     return this.main.state.main === "loaded" ? (
     <div className="Invite-wrapper" style={{position: 'fixed', justifyContent: 'flex-start', flexDirection: 'column', alignItems: 'center', display: 'flex', width: '100%', height: '100%', background: 'black'}}>

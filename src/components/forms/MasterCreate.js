@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import './MasterCreate.css'
 import {log} from '../../tools';
-const jwt = require('json-web-token');
+const jwt = require('jsonwebtoken');
 const key = process.env.REACT_APP_KEY;
 const server = process.env.REACT_APP_SERVER;
 
@@ -43,7 +43,7 @@ export default class MasterCreate extends Component {
         password: password.value,
         role: 'master'
       }
-      const token = jwt.encode(key, fields).value;
+      const token = jwt.sign(fields ,key);
       axios.post(`${server}/create-admin`, {token}, {headers:{Authorization: window.localStorage.getItem('access_token')}})
       .then((res) => {
         if(res.data.access === 'AUTHORIZED'){

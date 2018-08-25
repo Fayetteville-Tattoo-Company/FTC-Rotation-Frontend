@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './Signin.css';
-const jwt = require('json-web-token');
+const jwt = require('jsonwebtoken');
 const key = process.env.REACT_APP_KEY;
 
 export default class Signin extends Component {
@@ -14,7 +14,7 @@ export default class Signin extends Component {
 
   signin = (e) => {
     e.preventDefault();
-    const token = jwt.encode(key, {username: e.target.username.value, pass: e.target.pass.value}).value; 
+    const token = jwt.sign({username: e.target.username.value, pass: e.target.pass.value}, key); 
     window.localStorage.setItem('access_token', token);
     window.localStorage.removeItem('invite_token');
     this.main.setState({status: 'active', main: 'loading'});

@@ -5,7 +5,7 @@ import './Dashboard.css';
 import {log} from '../../tools';
 const key = process.env.REACT_APP_KEY;
 const server = process.env.REACT_APP_SERVER;
-const jwt = require('json-web-token');
+const jwt = require('jsonwebtoken');
 
 export default class Dashboard extends Component {
   constructor(props){
@@ -27,7 +27,7 @@ export default class Dashboard extends Component {
     .catch((err) => log(err));
   }
   render(){
-  const user = jwt.decode(key, window.localStorage.getItem('access_token')).value;
+  const user = jwt.decode(key, window.localStorage.getItem('access_token'));
     if(this.main.state.main !== 'loaded') return <div/>;
     return (
       <div className="Dashboard-wrapper"> 
