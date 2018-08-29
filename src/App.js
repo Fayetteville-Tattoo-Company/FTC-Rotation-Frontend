@@ -74,7 +74,7 @@ class Invite extends Component {
   
 
   render(){
-    const user = jwt.decode(key, window.localStorage.getItem('invite_token'));
+    const user = jwt.decode(window.localStorage.getItem('invite_token'), key);
     log(user);
     return this.main.state.main === "loaded" ? (
     <div className="Invite-wrapper" style={{position: 'fixed', justifyContent: 'flex-start', flexDirection: 'column', alignItems: 'center', display: 'flex', width: '100%', height: '100%', background: 'black'}}>
