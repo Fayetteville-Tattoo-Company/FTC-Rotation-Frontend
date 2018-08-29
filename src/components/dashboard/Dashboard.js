@@ -27,7 +27,7 @@ export default class Dashboard extends Component {
     .catch((err) => log(err));
   }
   render(){
-  const user = jwt.decode(key, window.localStorage.getItem('access_token'));
+  const user = jwt.decode(window.localStorage.getItem('access_token'), key);
     if(this.main.state.main !== 'loaded') return <div/>;
     return (
       <div className="Dashboard-wrapper"> 
