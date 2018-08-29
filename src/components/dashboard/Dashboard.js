@@ -14,7 +14,7 @@ export default class Dashboard extends Component {
     this.main = props.main;
   }
   resetCount = () => {
-    axios.put(`${server}/reset`, {headers:{Authorization: window.localStorage.getItem('access_token')}})
+    axios.put(`${server}/reset`,{}, {headers:{Authorization: window.localStorage.getItem('access_token')}})
     .then((res) => {
       log(res.data);
     })
