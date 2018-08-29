@@ -42,10 +42,7 @@ class Invite extends Component {
     if(!iKey) return alert('ACCESS KEY MISSING');
     if(!username || !name || !pass || !confirm) return alert('ALL FIELDS ARE REQUIRED');
     if(pass !== confirm) return alert('PASSWORDS DO NOT MATCH');
-      console.log(this.state.image);
-      const file = new FormData();
-      file.append('image', this.state.image);
-
+      
       const fields = {
         username,
         name,
@@ -53,12 +50,13 @@ class Invite extends Component {
         role: 'admin',
         key: iKey,
         email, 
-        type,
-        profile: file
+        type
       };
       const token = jwt.sign(fields, key);
+      console.log(token);
       axios.post(`${server}/invite-signup`, fields, {headers:{Authorization: token}})
       .then( (res) => {
+        console.log(res.data);
         if(res.data === 'UNAUTHORIZED') {
           alert('KEY IS NO LONGER VALID');
           window.localStorage.clear();
