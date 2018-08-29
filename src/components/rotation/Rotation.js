@@ -81,7 +81,7 @@ export default class Rotation extends Component {
   }
 
   render(){
-    const user = jwt.decode(key, window.localStorage.getItem('access_token'));
+    const user = jwt.decode(window.localStorage.getItem('access_token'), key);
     window.onresize = () => this.setState({height: window.innerHeight, width: window.innerWidth});
     return (
       <div className="Rotation-wrapper">
