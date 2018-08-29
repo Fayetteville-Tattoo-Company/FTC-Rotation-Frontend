@@ -17,6 +17,7 @@ export default class Dashboard extends Component {
     axios.put(`${server}/reset`,{}, {headers:{Authorization: window.localStorage.getItem('access_token')}})
     .then((res) => {
       log(res.data);
+      alert(res.data);
     })
     .catch((err) => log(err));
   }
