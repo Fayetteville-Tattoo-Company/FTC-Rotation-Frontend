@@ -50,7 +50,7 @@ export default class Dashboard extends Component {
         <div className="Dashboard-dropdown" style={this.state.settings ? {height: '3rem'} : null}>
           <div className="Dashboard-dropdown-btn" onClick={() => this.setState({settings: false, inviteForm: true, inviteType: 'admin'})} style={{display: 'flex', justifyContent: 'center', alignItems: 'center',background: 'rgb(38,38,38)', padding: '1rem', cursor: 'pointer'}}>CREATE ADMIN</div>
           <div className="Dashboard-dropdown-btn" onClick={() => this.setState({settings: false, inviteForm: true, inviteType: 'artist'})} style={{display: 'flex', justifyContent: 'center', alignItems: 'center',background: 'rgb(38,38,38)', padding: '1rem', cursor: 'pointer'}}>CREATE ARTIST</div>
-          <div className="Dashboard-dropdown-btn" onClick={() => this.resetCount()}>RESET ROTATION</div>
+          <div className="Dashboard-dropdown-btn" onClick={() => window.confirm('Are You Sure You Want To Reset Rotation') ? this.resetCount() : null} style={{display: 'flex', justifyContent: 'center', alignItems: 'center',background: 'rgb(38,38,38)', padding: '1rem', cursor: 'pointer'}}>RESET ROTATION</div>
         
         </div>
         <div className="Dashboard-dropdown" style={this.state.inviteForm ? {height: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center'} : null}>
