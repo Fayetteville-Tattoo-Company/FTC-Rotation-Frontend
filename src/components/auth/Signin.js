@@ -26,7 +26,7 @@ export default class Signin extends Component {
     return (
       <div className="Signin-wrapper">
           <div className="flex-center" style={{ [this.state.view === "landscape" ? 'borderRight' : 'borderBottom']: '1px solid white',width: this.state.view === "landscape" ? '50%' : '100%'}}>
-            <img alt="logo" width="100%" src="https://scontent-atl3-1.xx.fbcdn.net/v/t1.0-9/29511489_1704760912910824_2222018091826378716_n.jpg?_nc_cat=0&oh=c2bf09d9a1c8434a7c965d271b06f93c&oe=5B3BB901" />
+            <img alt="logo" width="100%" src={'images/ftc-logo-black.png'} />
           </div>
           <form className="flex-center -- form" style={{flex:1,flexDirection: 'column', padding: '1rem', overflowY: 'auto'}} onSubmit={(e) => this.signin(e)}>
             <p>AUTHORIZATION</p>
