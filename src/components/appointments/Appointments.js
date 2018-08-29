@@ -66,7 +66,7 @@ export default class Appointments extends Component {
     .catch((err) =>log(err));
   }
   render(){
-    const user = jwt.decode(key, window.localStorage.getItem('access_token'));
+    const user = jwt.decode(window.localStorage.getItem('access_token'), key);
     
    return user ? (
       <div className="Appointments-wrapper">
