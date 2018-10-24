@@ -13,6 +13,7 @@ export default class Signin extends Component {
   }
 
   signin = (e) => {
+    console.log(e.target);
     e.preventDefault();
     const token = jwt.sign({username: e.target.username.value, pass: e.target.pass.value}, key); 
     window.localStorage.setItem('access_token', token);
@@ -28,7 +29,7 @@ export default class Signin extends Component {
           <div className="flex-center" style={{ [this.state.view === "landscape" ? 'borderRight' : 'borderBottom']: '1px solid white',width: this.state.view === "landscape" ? '50%' : '100%'}}>
             <img alt="logo" width="100%" src={'images/ftc-logo-black.png'} />
           </div>
-          <form onKeyDown={(e) => e.key === 'Enter' ? this.signin(e) : null} className="flex-center -- form" style={{flex:1,flexDirection: 'column', padding: '1rem', overflowY: 'auto'}} onSubmit={(e) => this.signin(e)}>
+          <form onKeyDown={(e) => e.key === 'Enter' ? alert('submited') : null} className="flex-center -- form" style={{flex:1,flexDirection: 'column', padding: '1rem', overflowY: 'auto'}} onSubmit={(e) => this.signin(e)}>
             <p>AUTHORIZATION</p>
             <input type='type' name="username" placeholder="Username"/>
             <input type='password' name="pass" placeholder="Password"/>
