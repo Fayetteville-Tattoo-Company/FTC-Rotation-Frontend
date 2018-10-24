@@ -17,13 +17,13 @@ export default class Access extends Component {
   sizeDown = () => document.getElementById('logo').style.width = '40%';
   render(){
     return (
-      <form onSubmit={(e) => this.authorize(e)} className="Access-wrapper" >
+      <form onKeyDown={(e) => e.key === 'Enter' ? this.authorize(e) : null} onSubmit={(e) => this.authorize(e)} className="Access-wrapper" >
         <div  className="Access-section">
           <img id="logo" alt="logo" src={'images/ftc-logo-black.png'} width="80%"/>
         </div>
         <div className="Access-section">
           <p>Please Enter The Access Token</p>
-          <input onFocus={(e) => window.innerHeight > window.innerWidth ? this.sizeDown() : null} onBlur={() => this.sizeUp()} name="token" placeholder="ACCESS TOKEN" autoComplete="off"/>
+          <input onFocus={(e) => window.innerHeight < window.innerWidth ? this.sizeDown() : null} onBlur={() => this.sizeUp()} name="token" placeholder="ACCESS TOKEN" autoComplete="off"/>
         </div>
       </form>
     );
