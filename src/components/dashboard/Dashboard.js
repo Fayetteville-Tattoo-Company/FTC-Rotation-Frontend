@@ -27,8 +27,9 @@ export default class Dashboard extends Component {
   }
   invite = (e) => {
     e.preventDefault();
+    const form = document.getElementById('invite');
     log(this.state.inviteType);
-    axios.post(`${server}/invite`, {email: e.target.email.value, userType: this.state.inviteType}, {headers:{Authorization: window.localStorage.getItem('access_token')}})
+    axios.post(`${server}/invite`, {email: form.email.value, userType: this.state.inviteType}, {headers:{Authorization: window.localStorage.getItem('access_token')}})
     .then((res) => {
       log(res.data);
     })
@@ -55,11 +56,11 @@ export default class Dashboard extends Component {
         
         </div>
         <div className="Dashboard-dropdown" style={this.state.inviteForm ? {height: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center'} : null}>
-          <form onSubmit={(e) => this.invite(e)} className="Dashboard-admin-form" style={{height: '90%', width: '90%',display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', background: 'rgb(38,38,38)', padding: '1rem'}}>
+          <form id="invite" className="Dashboard-admin-form" style={{height: '90%', width: '90%',display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', background: 'rgb(38,38,38)', padding: '1rem'}}>
             <input name="email" placeholder="EMAIL" type="email"/>
             
-            <div style={{background: 'red', textAlign: 'right', width: '80%', }}>
-              <button >SUBMIT</button>
+            <div style={{textAlign: 'right', width: '80%', }}>
+              <button onClick={(e) => this.invite(e)} >SUBMIT</button>
               <button onClick={(e) => {e.preventDefault(); this.setState({settings: false, inviteForm: false,inviteType: null})}}>CANCEL</button>
             </div>
           </form>
