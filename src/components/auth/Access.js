@@ -5,19 +5,19 @@ export default class Access extends Component {
     super(props);
     this.main = props.main;
   }
-  authorize = (e) => {
-    e.preventDefault();
+  authorize = () => {
+    const form = document.getElementById('access');
     this.main.setState({main: 'loading'});
-    this.main.verifyToken(e.target.token.value, e.target.token);    
-    e.target.token.value = "";
-    e.target.token.blur();
+    this.main.verifyToken(form.token.value, form.token);    
+    form.token.value = "";
+    form.token.blur();
   }
 
   sizeUp = () => document.getElementById('logo').style.width = '80%';
   sizeDown = () => document.getElementById('logo').style.width = '40%';
   render(){
     return (
-      <form onKeyDown={(e) => e.key === 'Enter' ? this.authorize(e) : null} onSubmit={(e) => this.authorize(e)} className="Access-wrapper" >
+      <form id="access" onKeyDown={(e) => e.key === 'Enter' ? this.authorize() : null} className="Access-wrapper" >
         <div  className="Access-section">
           <img id="logo" alt="logo" src={'images/ftc-logo-black.png'} width="80%"/>
         </div>

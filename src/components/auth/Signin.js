@@ -12,10 +12,10 @@ export default class Signin extends Component {
     this.main = props.main;
   }
 
-  signin = (e) => {
-    console.log(e.target);
-    e.preventDefault();
-    const token = jwt.sign({username: e.target.username.value, pass: e.target.pass.value}, key); 
+  signin = () => {
+    const form = document.getElementById('login');
+    console.log(form.username.value);
+    const token = jwt.sign({username: form.username.value, pass: form.pass.value}, key); 
     window.localStorage.setItem('access_token', token);
     window.localStorage.removeItem('invite_token');
     this.main.setState({status: 'active', main: 'loading'});
@@ -29,11 +29,10 @@ export default class Signin extends Component {
           <div className="flex-center" style={{ [this.state.view === "landscape" ? 'borderRight' : 'borderBottom']: '1px solid white',width: this.state.view === "landscape" ? '50%' : '100%'}}>
             <img alt="logo" width="100%" src={'images/ftc-logo-black.png'} />
           </div>
-          <form onKeyDown={(e) => e.key === 'Enter' ? alert('submited') : null} className="flex-center -- form" style={{flex:1,flexDirection: 'column', padding: '1rem', overflowY: 'auto'}} onSubmit={(e) => this.signin(e)}>
+          <form id="login" onKeyDown={(e) => e.key === 'Enter' ? this.signin() : null} className="flex-center -- form" style={{flex:1,flexDirection: 'column', padding: '1rem', overflowY: 'auto'}}>
             <p>AUTHORIZATION</p>
             <input type='type' name="username" placeholder="Username"/>
             <input type='password' name="pass" placeholder="Password"/>
-            <input type='submit' hidden/>
           </form>
       </div>
     );
