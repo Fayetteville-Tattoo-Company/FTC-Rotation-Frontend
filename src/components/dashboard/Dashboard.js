@@ -44,7 +44,7 @@ export default class Dashboard extends Component {
           <div>
             {user ? user.admin ? user.admin.role === 'master' ? <div onClick={() => this.setState({settings: !this.state.settings, inviteForm: false})}><i style={{margin: '1rem'}} className="fas fa-cogs -- hover-red -- pointer" /></div> : null : null : null}
           </div>
-          <div style={{background:'red', flex:1}}/>
+          <div style={{flex:1, fontFamily: 'Times New Roman'}}>Beta v1.0</div>
           <div onClick={() => this.logout()}>
             <i style={{margin: '1rem'}} className="fas fa-sign-out-alt -- hover-red -- pointer" />
           </div>

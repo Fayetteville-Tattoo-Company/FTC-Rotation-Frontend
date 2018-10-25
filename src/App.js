@@ -64,10 +64,12 @@ class Invite extends Component {
         }
         if(res.data.status === 'SUCCESS') {
           window.localStorage.clear();
-          window.localStorage.setItem('access_token', res.data.token); 
+          window.localStorage.setItem('access_token', res.data.token);
+          alert('SUCCESS');
+          this.main.setState({main:'loading', status: 'signin'});
         }
       })
-      .catch((err) => alert(err));
+      .catch((err) => {alert(err); console.log(err)});
     }
   
 
