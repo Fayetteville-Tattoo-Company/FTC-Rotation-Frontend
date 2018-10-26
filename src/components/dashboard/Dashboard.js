@@ -76,7 +76,7 @@ export default class Dashboard extends Component {
           <div>
             {
               user && user.admin && user.admin.role === 'master' &&
-                <div onClick={() => this.toggleSetting(!this.state.settings)}>
+                <div onClick={() => {this.toggleSetting(!this.state.settings); this.toggleInvite()}}>
                   <i style={{margin: '1rem'}} className="fas fa-cogs -- hover-red -- pointer" />
                 </div>
             }
