@@ -54,7 +54,7 @@ export default class Dashboard extends Component {
     })
     .catch((err) => log(err));
   }
-  toggleSetting = set => this.setState({settings: set});
+  toggleSetting = (set) => {this.setState({settings: set}); set && this.toggleInvite();}
   toggleInvite = (inviteType) => {
     if(inviteType){
       this.toggleSetting(false);
@@ -62,7 +62,7 @@ export default class Dashboard extends Component {
     }
     if(!inviteType){
       this.setState({inviteForm: false, inviteType: null});
-      return this.toggleSetting(true);
+      //return this.toggleSetting(true);
     }
   }
   render(){
@@ -76,7 +76,7 @@ export default class Dashboard extends Component {
           <div>
             {
               user && user.admin && user.admin.role === 'master' &&
-                <div onClick={() => {this.toggleSetting(!this.state.settings); this.toggleInvite()}}>
+                <div onClick={() => {this.toggleSetting(!this.state.settings);}}>
                   <i style={{margin: '1rem'}} className="fas fa-cogs -- hover-red -- pointer" />
                 </div>
             }
