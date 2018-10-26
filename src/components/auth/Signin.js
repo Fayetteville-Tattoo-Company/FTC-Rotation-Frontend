@@ -14,7 +14,6 @@ export default class Signin extends Component {
 
   signin = () => {
     const form = document.getElementById('login');
-    console.log(form.username.value);
     const token = jwt.sign({username: form.username.value, pass: form.pass.value}, key); 
     window.localStorage.setItem('access_token', token);
     window.localStorage.removeItem('invite_token');
