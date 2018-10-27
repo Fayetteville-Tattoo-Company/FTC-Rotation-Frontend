@@ -111,6 +111,11 @@ class App extends Component {
     log(process.env.NODE_ENV); 
     
   }
+  componentWillMount(){
+    document.location.href.split('://')[0] === 'http' && 
+    process.env.NODE_ENV === 'production' && 
+    document.location.replace(`https://${document.location.hostname}`);
+  }
 
 
   verifyToken = (token, input) => {
