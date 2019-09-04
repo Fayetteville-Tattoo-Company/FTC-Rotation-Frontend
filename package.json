@@ -48,7 +48,7 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "set NODE_ENV=production&& node server.js",
+    "start": "npm run build & lsof -t -i :7775 | xargs -t -n1 kill -9 ; serve -p 7775 -s build",
     "dev": "set NODE_ENV=development&& node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"

@@ -25,6 +25,7 @@ export default class MasterCreate extends Component {
   }
   create = (e) => {
     e.preventDefault();
+//    e = document.getElementById('master');
     const {username, name, password, confirm} = e.target;
     !username.value ? username.style.border = '2px solid red' : username.style.border = '2px solid green';
     !name.value ? name.style.border = '2px solid red' : name.style.border = '2px solid green';
@@ -74,7 +75,7 @@ export default class MasterCreate extends Component {
 
   render(){
     return (
-      <form className="Master_Create-wrapper" onSubmit={(e) => this.create(e)}>
+      <form id='master' onKeyPress=((e)=> e.key === 'Enter' ? this.create(): null} className="Master_Create-wrapper" onSubmit={(e) => this.create(e)}>
         <header><h2>MASTER SIGNUP</h2></header>
         
         <div style={{ width: '100%',flexWrap: 'wrap', display: 'flex', justifyContent: 'center', flexDirection:'column', alignItems: 'center'}}>
@@ -90,7 +91,7 @@ export default class MasterCreate extends Component {
               <input autoComplete="off" name="name" placeholder="name" />
               <input name="password" placeholder="password" type="password"/>
               <input name="confirm" placeholder="confirm" type="password" />
-              <input type="submit" style={{display: 'none'}}/>
+              <input type="submit" />
             </div>
           </div>
         </div>

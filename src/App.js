@@ -106,8 +106,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.systemConnect();
-    log(process.env.REACT_APP_KEY); 
+    this.systemConnect(); 
     log(process.env.NODE_ENV); 
     
   }
