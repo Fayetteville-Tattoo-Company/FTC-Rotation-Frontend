@@ -54,7 +54,7 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
-    "bcrypt": "^2.0.0"
+    "bcrypt": "^5.0.0"
   },
   "jest": {
     "collectCoverageFrom": [
